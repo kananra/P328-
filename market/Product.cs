@@ -1,8 +1,66 @@
 ﻿
+
 internal class Product
 {
-    private string Name;
-    private int Price;
+    private string Name
+    {
+
+        get { return Name; }
+
+
+        set
+        {
+            Name = value;
+
+            if (string.IsNullOrEmpty(value))
+            {
+                while (string.IsNullOrEmpty(value))
+                {
+                    Console.WriteLine("Please enter your product name");
+                    string check = Console.ReadLine();
+                    value = check;
+                }
+
+
+            }
+
+
+        }
+
+    }
+
+    private int Price
+    {
+        get { return Price; }
+
+
+        set
+        {
+
+            Price = value;
+
+            if (value > 0)
+            {
+                Price = value;
+            }
+            else
+            {
+                while (value < 1)
+                {
+
+                    Console.WriteLine("Price can not be less than 1");
+                    Console.WriteLine("Please write again");
+                    int less = int.Parse(Console.ReadLine());
+                    value = less;
+
+                }
+            }
+
+
+        }
+
+    }
+
     protected int Count;
     private int TotalIncome;
     private int Num;
@@ -15,46 +73,9 @@ internal class Product
 
     }
 
-    public void MinPrice(int price)
-    {
-        if (price > 0)
-        {
-            Price = price;
-        }
-        else
-        {
-            while (price < 1)
-            {
-
-                Console.WriteLine("Price can not be less than 1");
-                Console.WriteLine("Please write again");
-                int less = int.Parse(Console.ReadLine());
-                price = less;
-
-            }
-        }
-    }
-
-    public void Null(string name)
-    {
-        if (string.IsNullOrEmpty(name))
-        {
-            while (string.IsNullOrEmpty(name))
-            {
-                Console.WriteLine("Please enter your product name");
-                string check = Console.ReadLine();
-                name = check;
-            }
 
 
-        }
-        else
-        {
-            Name = name;
-        }
 
-
-    }
     public int Sell(int num)
     {
         Num = num;
@@ -72,10 +93,10 @@ internal class Product
             {
                 Console.WriteLine("Out of Stock");
                 Console.WriteLine($"Total income: {TotalIncome}$");
-                
+
             }
 
-            
+
         }
         return Count;
 
