@@ -7,7 +7,7 @@ StudentService.Menu();
 int num = int.Parse(Console.ReadLine());
 Group group=new Group();
 
-do
+while(num!=0)
 {
     
     switch (num)
@@ -49,4 +49,4 @@ do
     num = int.Parse(Console.ReadLine());
     Console.Clear();
 
-} while (true);
+}
