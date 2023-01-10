@@ -11,6 +11,25 @@ namespace ConsoleApp4.Services.Implementations
     internal static class Menuservice
     {
         private static CourseServices courseservice = new CourseServices();
+
+        public static void Menu()
+        {
+            Console.WriteLine("Choose one of them ");
+            Console.WriteLine("   ");
+            Console.WriteLine("1.Create new group");
+            Console.WriteLine("*******************");
+            Console.WriteLine("2.Show all groups");
+            Console.WriteLine("*******************");
+            Console.WriteLine("3.Edit group");
+            Console.WriteLine("*******************");
+            Console.WriteLine("4.Show students in group");
+            Console.WriteLine("*******************");
+            Console.WriteLine("5.Show all students");
+            Console.WriteLine("*******************");
+            Console.WriteLine("6.Create new student");
+            Console.WriteLine("*******************");
+
+        }
         public static void CreateGroupMenu()
         {
             Console.Clear();
@@ -120,8 +139,38 @@ namespace ConsoleApp4.Services.Implementations
             }
 
         }
+        static void CategoryMenu()
+        {
 
+            foreach (GroupCategory category in Enum.GetValues(typeof(GroupCategory)))
+            {
+                Console.WriteLine($" For {category} press {(int)category}");
+                Console.WriteLine("*******************");
+            }
+        }
+        public static int MenuInput()
+        {
+            bool status = true;
+            while (status)
+            {
+                status = int.TryParse(Console.ReadLine(), out int result);
 
+                if (result > 0 && result < 7 && status == true)
+                {
+                    status = false;
+                    return result;
+
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please enter correctly");
+                    break;
+                }
+            }
+            return 0;
+
+        }
         public static void CreateStudentMenu()
         {
             Console.Clear();
@@ -237,56 +286,6 @@ namespace ConsoleApp4.Services.Implementations
             }
             courseservice.EditGroup(groupName);
 
-        }
-        public static void Menu()
-        {
-            Console.WriteLine("Choose one of them ");
-            Console.WriteLine("   ");
-            Console.WriteLine("1.Create new group");
-            Console.WriteLine("*******************");
-            Console.WriteLine("2.Show all groups");
-            Console.WriteLine("*******************");
-            Console.WriteLine("3.Edit group");
-            Console.WriteLine("*******************");
-            Console.WriteLine("4.Show students in group");
-            Console.WriteLine("*******************");
-            Console.WriteLine("5.Show all students");
-            Console.WriteLine("*******************");
-            Console.WriteLine("6.Create new student");
-            Console.WriteLine("*******************");
-
-        }
-        public static int MenuInput()
-        {
-            bool status = true;
-            while (status)
-            {
-                status = int.TryParse(Console.ReadLine(), out int result);
-
-                if (result > 0 && result < 7 && status == true)
-                {
-                    status = false;
-                    return result;
-
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Please enter correctly");
-                    break;
-                }
-            }
-            return 0;
-
-        }
-        static void CategoryMenu()
-        {
-
-            foreach (GroupCategory category in Enum.GetValues(typeof(GroupCategory)))
-            {
-                Console.WriteLine($" For {category} press {(int)category}");
-                Console.WriteLine("*******************");
-            }
         }
     }
 }

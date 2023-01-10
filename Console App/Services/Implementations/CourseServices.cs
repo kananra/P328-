@@ -8,44 +8,6 @@ namespace ConsoleApp4.Services.Implementations
 {
     internal class CourseServices : ICourseServices
     {
-        public void CreateGroup(string CategoryName, int GroupNo, bool IsOnline)
-        {
-            if (CategoryName != null && GroupNo != 0)
-            {
-                bool HasGroup = false;
-                foreach (var group in Course.Groupss)
-                {
-                    if (CategoryName == group.No.Substring(0, 1) && GroupNo.ToString() == group.No.Substring(1))
-                    {
-                        HasGroup = true;
-                        break;
-                    }
-                }
-
-                if (!HasGroup)
-                {
-                    Groups Group = new Groups();
-                    Group.No = CategoryName + GroupNo;
-                    Group.IsOnline = IsOnline;
-                    if (IsOnline)
-                    {
-                        Group.Limit = 15;
-                    }
-                    else
-                    {
-                        Group.Limit = 10;
-                    }
-                    Course.Groupss.Add(Group);
-                    Console.Clear();
-                }
-                else
-                {
-                    Console.WriteLine("This group already created");
-                    Console.WriteLine("*****************************");
-                }
-            }
-        }
-
         public void CreateStudent(string Name, string GroupName, bool? IsGuarantee)
         {
             if (Name != null && GroupName != null && IsGuarantee != null)
@@ -115,7 +77,73 @@ namespace ConsoleApp4.Services.Implementations
             }
             Console.Clear();
         }
+        public void CreateGroup(string CategoryName, int GroupNo, bool IsOnline)
+        {
+            if (CategoryName != null && GroupNo != 0)
+            {
+                bool HasGroup = false;
+                foreach (var group in Course.Groupss)
+                {
+                    if (CategoryName == group.No.Substring(0, 1) && GroupNo.ToString() == group.No.Substring(1))
+                    {
+                        HasGroup = true;
+                        break;
+                    }
+                }
 
+                if (!HasGroup)
+                {
+                    Groups Group = new Groups();
+                    Group.No = CategoryName + GroupNo;
+                    Group.IsOnline = IsOnline;
+                    if (IsOnline)
+                    {
+                        Group.Limit = 15;
+                    }
+                    else
+                    {
+                        Group.Limit = 10;
+                    }
+                    Course.Groupss.Add(Group);
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("This group already created");
+                    Console.WriteLine("*****************************");
+                }
+            }
+        }
+        public void ShowGroups()
+        {
+            if (Course.Groupss.Count != 0)
+            {
+                Console.Clear();
+                foreach (var group in Course.Groupss)
+                {
+                    string GroupType = "";
+                    if (group.IsOnline)
+                    {
+                        GroupType = "Online";
+                    }
+                    else
+                    {
+                        GroupType = "Offline";
+
+                    }
+                    Console.WriteLine($"Group No : {group.No} , Group Type : {GroupType} ,Students counts : {group.Students.Count}");
+                    Console.WriteLine("***************************************");
+                }
+            }
+
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("There is not group");
+                Console.WriteLine("****************************");
+                return;
+            }
+        }
         public void EditGroup(string GroupName)
         {
             if (Course.Groupss.Count != 0)
@@ -158,9 +186,6 @@ namespace ConsoleApp4.Services.Implementations
             Console.Clear();
             Console.WriteLine("Please write correctly");
         }
-
-
-
         public void ShowAllStudents()
         {
             if (Course.Groupss.Count > 0)
@@ -195,38 +220,6 @@ namespace ConsoleApp4.Services.Implementations
             }
 
         }
-
-        public void ShowGroups()
-        {
-            if (Course.Groupss.Count != 0)
-            {
-                Console.Clear();
-                foreach (var group in Course.Groupss)
-                {
-                    string GroupType = "";
-                    if (group.IsOnline)
-                    {
-                        GroupType = "Online";
-                    }
-                    else
-                    {
-                        GroupType = "Offline";
-
-                    }
-                    Console.WriteLine($"Group No : {group.No} , Group Type : {GroupType} ,Students counts : {group.Students.Count}");
-                    Console.WriteLine("***************************************");
-                }
-            }
-
-            else
-            {
-                Console.Clear();
-                Console.WriteLine("There is not group");
-                Console.WriteLine("****************************");
-                return;
-            }
-        }
-
         public void ShowStudentsInGroup(string GroupName)
         {
             if (Course.Groupss.Count != 0)
@@ -275,6 +268,8 @@ namespace ConsoleApp4.Services.Implementations
                 return;
             }
         }
+
+
     }
 
 

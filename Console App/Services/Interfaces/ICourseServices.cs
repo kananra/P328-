@@ -12,10 +12,10 @@ namespace ConsoleApp4.Services.Interfaces
     {
         public void CreateGroup(string CategoryName, int GroupNo, bool IsOnline);
         public void CreateStudent(string Name, string GroupName, bool? IsGuarantee);
-        public void EditGroup(string GroupName);
-        public void ShowAllStudents();
-        public void ShowGroups();
         public void ShowStudentsInGroup(string GroupName);
+        public void ShowGroups();
+        public void ShowAllStudents();
+        public void EditGroup(string GroupName);
 
 
 
